@@ -7,7 +7,8 @@
     "dev": "webpack --config webpack/webpack.dev.js --watch",
     "build": "webpack --config webpack/webpack.prod.js",
     "clean": "rimraf dist",
-    "test": "npx jest --watch"
+    "test": "npx jest",
+    "testw": "npx jest --watch"
   },
   "author": "",
   "license": "MIT",

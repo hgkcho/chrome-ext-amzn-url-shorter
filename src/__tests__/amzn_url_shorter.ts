@@ -1,7 +1,7 @@
 import {
   ShortenURL,
   searchByDP,
-  searchByGpGroup,
+  searchByGpProduct,
   searchByObidos,
   Err,
   invalidDomain,
@@ -33,7 +33,7 @@ test('searchByDP() handle dp successfully', async () => {
   ).resolves.toBe('https://www.amazon.co.jp/dp/4873118468')
 })
 
-test('searchByDP() handle searchByObidos successfully', async () => {
+test('searchByObidos() handle searchByObidos successfully', async () => {
   await expect(
     searchByObidos('https://www.amazon.co.jp/exec/obidos/ASIN/B00TEY2W4U/?th=1')
   ).resolves.toBe('https://www.amazon.co.jp/dp/B00TEY2W4U')
@@ -47,12 +47,46 @@ test('searchByO() successfully', async () => {
   ).resolves.toBe('https://www.amazon.co.jp/dp/B00TEY2W4U')
 })
 
+
+test('searchByGpGroup() successfully', async () => {
+  await expect(
+    searchByGpProduct(
+      'https://www.amazon.co.jp/gp/product/B00TEY2W4U?pf_rd_m=A3RN7G7QC5MWSZ&pf_rd_s=merchandised-search-2&pf_rd_r=GTXQ42P9398K6X2FJBER&pf_rd_t=101&pf_rd_p=3a53c418-a3d9-4295-9b7c-cec4bbc24d66&pf_rd_i=19877613011'
+    )
+  ).resolves.toBe('https://www.amazon.co.jp/dp/B00TEY2W4U')
+})
+
+
 test('ShortenURL() fail with .cojp', async () => {
   await expect(
     ShortenURL(
       'https://www.amazon.cojp/Go言語による並行処理-Katherine-Cox-Buday/dp/4873118468/ref=sr_1_1?__mk_ja_JP=カタカナ&dchild=1&keywords=Go言語による並行処理&qid=1606873816&sr=8-1'
     )
   ).rejects.toThrowError(Err.ErrInvalidDomain)
+})
+
+test('ShortenURL() pass with /gp/product pattern', async () => {
+  await expect(
+    ShortenURL(
+      'https://www.amazon.co.jp/Go言語による並行処理-Katherine-Cox-Buday/gp/product/4873118468/ref=sr_1_1?__mk_ja_JP=カタカナ&dchild=1&keywords=Go言語による並行処理&qid=1606873816&sr=8-1'
+    )
+  ).resolves.toBe('https://www.amazon.co.jp/dp/4873118468')
+})
+
+test('ShortenURL() pass with /o/ASIN pattern', async () => {
+  await expect(
+    ShortenURL(
+      'https://www.amazon.co.jp/Go言語による並行処理-Katherine-Cox-Buday/o/ASIN/4873118468/ref=sr_1_1?__mk_ja_JP=カタカナ&dchild=1&keywords=Go言語による並行処理&qid=1606873816&sr=8-1'
+    )
+  ).resolves.toBe('https://www.amazon.co.jp/dp/4873118468')
+})
+
+test('ShortenURL() pass with /exec/obidos/ASIN pattern', async () => {
+  await expect(
+    ShortenURL(
+      'https://www.amazon.co.jp/Go言語による並行処理-Katherine-Cox-Buday/exec/obidos/ASIN/4873118468/ref=sr_1_1?__mk_ja_JP=カタカナ&dchild=1&keywords=Go言語による並行処理&qid=1606873816&sr=8-1'
+    )
+  ).resolves.toBe('https://www.amazon.co.jp/dp/4873118468')
 })
 
 test('ShortenURL() pass with .co.jp', async () => {

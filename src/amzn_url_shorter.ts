@@ -26,8 +26,9 @@ export function ShortenURL(url: string): Promise<string> {
     }
     const candidates: string[] = await Promise.all([
       searchByDP(url),
-      searchByGpGroup(url),
+      searchByGpProduct(url),
       searchByObidos(url),
+      searchByO(url),
     ])
     candidates.map((v) => {
       if (v !== '') {
@@ -85,7 +86,7 @@ export async function searchByObidos(url: string): Promise<string> {
 }
 
 // This handles format like "https://www.amazon.co.jp/gp/product/B00TEY2W72/"
-export async function searchByGpGroup(url: string): Promise<string> {
+export async function searchByGpProduct(url: string): Promise<string> {
   let ret: string = ''
   let returnEmpty: boolean = true
   url.split('/').forEach((value, idx, array) => {
