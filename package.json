@@ -9,7 +9,8 @@
     "clean": "rimraf dist",
     "test": "npx jest",
     "testw": "npx jest --watch",
-    "pkg": "zip -r pkg.zip dist/"
+    "zip": "zip -r pkg.zip dist/",
+    "pkg": "yarn clean && yarn build && yarn zip"
   },
   "author": "",
   "license": "MIT",

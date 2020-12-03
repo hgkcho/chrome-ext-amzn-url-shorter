@@ -23,6 +23,6 @@
     "background",
     "notifications",
     "declarativeContent",
-    "<all_urls>"
+    "activeTab"
   ]
 }
