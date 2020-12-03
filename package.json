@@ -8,7 +8,8 @@
     "build": "webpack --config webpack/webpack.prod.js",
     "clean": "rimraf dist",
     "test": "npx jest",
-    "testw": "npx jest --watch"
+    "testw": "npx jest --watch",
+    "pkg": "zip -r pkg.zip dist/"
   },
   "author": "",
   "license": "MIT",

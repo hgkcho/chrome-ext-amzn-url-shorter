@@ -32,21 +32,22 @@ chrome.runtime.onInstalled.addListener(function() {
 });
 
 
-chrome.pageAction.onClicked.addListener((tab:chrome.tabs.Tab) => {
-  chrome.tabs.query(queryInfo, async function(tabs:chrome.tabs.Tab[]) {
-    let url:string = tabs[0].url!
-    const shortURL = await ShortenURL(url)
-    Clipboard.copy(shortURL)
-    let opt: chrome.notifications.NotificationOptions = {
-        type: "basic",
-        title: "Copied!",
-        message: shortURL,
-        iconUrl: "images/icon_48.png",
-        priority: 1,
-        isClickable: false
-    }
-    chrome.notifications.create("",opt,(notificationId:string)=> {
-        console.log(notificationId)
-    })
+chrome.pageAction.onClicked.addListener(async (tab: chrome.tabs.Tab) => {
+  let url: string = tab.url
+  if (url === "") {
+    return
+  }
+  const shortURL = await ShortenURL(url)
+  Clipboard.copy(shortURL)
+  let opt: chrome.notifications.NotificationOptions = {
+    type: 'basic',
+    title: 'Copied!',
+    message: shortURL,
+    iconUrl: 'images/icon_48.png',
+    priority: 1,
+    isClickable: false,
+  }
+  chrome.notifications.create('', opt, (notificationId: string) => {
+    console.log(notificationId)
   })
-});
+})
