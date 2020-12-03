@@ -7,11 +7,15 @@ const queryInfo: chrome.tabs.QueryInfo = {
   currentWindow: true
 };
 
-let conditions:chrome.declarativeContent.PageStateMatcher[] = new Array<chrome.declarativeContent.PageStateMatcher>()
-
-allowDomains.map((value:string) => {
-  conditions.push(new chrome.declarativeContent.PageStateMatcher({pageUrl: {hostEquals: value}}))
-})
+const conditions = ():chrome.declarativeContent.PageStateMatcher[] => {
+  let ret = new Array<chrome.declarativeContent.PageStateMatcher>()
+  allowDomains.map((value: string, idx: number, array: string[]) => {
+    ret.push(
+      new chrome.declarativeContent.PageStateMatcher({ pageUrl: { hostEquals: value } })
+    )
+  })
+  return ret
+}
 
 chrome.runtime.onInstalled.addListener(function() {
     // Replace all rules ...
@@ -20,7 +24,7 @@ chrome.runtime.onInstalled.addListener(function() {
       chrome.declarativeContent.onPageChanged.addRules([
         {
           // That fires when a page's URL contains
-          conditions: conditions,
+          conditions: conditions(),
           actions: [new chrome.declarativeContent.ShowPageAction()],
         },
       ])

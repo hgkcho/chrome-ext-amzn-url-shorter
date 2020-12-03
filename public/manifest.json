@@ -15,14 +15,13 @@
   },
 
   "background": {
-    "scripts": ["js/vendor.js", "js/background.js"],
+    "scripts": ["js/background.js"],
     "persistent": false
   },
 
   "permissions": [
     "background",
     "notifications",
-    "declarativeContent",
-    "<all_urls>"
+    "declarativeContent"
   ]
 }
