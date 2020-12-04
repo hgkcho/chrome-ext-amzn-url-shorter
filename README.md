@@ -1,6 +1,6 @@
 # Amazon URL Shorter with Chrome Extension
 
-Chrome Extension which makes it essy to shorten annoying amazon URL and copy to your clipboard
+Chrome Extension which makes it essy to shorten annoying amazon URL and copy to your clipboard by just clicking extension icon.
 
 ## Install
 
