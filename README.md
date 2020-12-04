@@ -2,6 +2,10 @@
 
 Chrome Extension which makes it essy to shorten annoying amazon URL and copy to your clipboard
 
+## Install
+
+install from <https://chrome.google.com/webstore/detail/amazon-url-shorter/ijnnpllhhhbiepadlboailceloakielg>
+
 ## Supported Domains
 
 * "www.amazon.ae"
@@ -31,3 +35,5 @@ Chrome Extension which makes it essy to shorten annoying amazon URL and copy to 
 * <https://www.amazon.co.jp/dp/XXXXXXXXXX/...>
 
 All these URL patterns will be converted to <https://www.amazon.co.jp/dp/XXXXXXXXXX/>
+
+inspired by <https://github.com/r7kamura/amazon_url_shortener>
